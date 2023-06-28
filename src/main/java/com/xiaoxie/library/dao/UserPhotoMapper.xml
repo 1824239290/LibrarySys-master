@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoxie.library.dao.UserPhotoMapper">
+
+    <insert id="addPhoto">
+        insert into userphoto(user_id, picture,upload_time)
+        values (#{userId}, #{picture}, #{uploadTime});
+    </insert>
+
+    <select id="selectPhoto" resultType="userPhoto">
+        select user_id, picture
+        from userphoto
+        where user_id = #{id}
+        order by upload_time desc limit 1;
+    </select>
+
+</mapper>

@@ -1,0 +1,49 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "welcome"
+  },
+  "logoInfo": {
+    "title": "READ BOOK",
+    "image": "images/favicon.ico",
+    "href": ""
+  },
+  "menuInfo": [
+        {
+          "title": "借阅管理",
+          "href": "borrowBook/borrowBookList",
+          "icon": "fa fa-window-maximize",
+          "target": "_self"
+        },
+        {
+          "title": "图书管理",
+          "href": "book/bookList",
+          "icon": "fa fa-book",
+          "target": "_self"
+        },
+        {
+          "title": "读者管理",
+          "href": "reader/readerList",
+          "icon": "fa fa-credit-card",
+          "target": "_self"
+        },
+        {
+          "title": "图书类型管理",
+          "href": "bookType/bookTypeList",
+          "icon": "fa fa-file-text",
+          "target": "_self"
+        },
+        {
+          "title": "公告管理",
+          "href": "notice/noticeList",
+          "icon": "fa fa-bell",
+          "target": "_self"
+        },
+        {
+          "title": "管理员管理",
+          "href": "admin/adminList",
+          "icon": "fa fa-user-circle-o",
+          "target": "_self"
+        }
+  ]
+}

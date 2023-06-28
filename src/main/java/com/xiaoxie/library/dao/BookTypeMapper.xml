@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoxie.library.dao.BookTypeMapper">
+
+    <resultMap id="BaseResultMap" type="com.xiaoxie.library.pojo.BookType">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="type_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="remark" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        , type_name, remark
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from booktype
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from booktype
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.xiaoxie.library.pojo.BookType">
+        insert into booktype (id, type_name, remark)
+        values (#{id,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xiaoxie.library.pojo.BookType">
+        insert into booktype
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="typeName != null">
+                type_name,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="typeName != null">
+                #{typeName,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xiaoxie.library.pojo.BookType">
+        update booktype
+        <set>
+            <if test="typeName != null">
+                type_name = #{typeName,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xiaoxie.library.pojo.BookType">
+        update booktype
+        set type_name = #{typeName,jdbcType=VARCHAR},
+            remark    = #{remark,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectAllBookType" resultType="bookType">
+        select type_name
+        from booktype
+    </select>
+
+    <select id="selectAllBookTypes" parameterType="bookType" resultType="bookType">
+        select id , type_name, remark
+        from booktype
+        <where>
+            <if test="typeName !=null and typeName !=''">
+                and type_name like "%"#{typeName}"%"
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteBookTypeByIds" parameterType="list">
+        delete from booktype where id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectByTypeName" resultType="bookType">
+        select type_name
+        from booktype
+        where type_name = #{typeName}
+    </select>
+
+    <select id="selectAllBookTypeNumber" resultType="int">
+        select count(*) from booktype
+    </select>
+
+</mapper>
